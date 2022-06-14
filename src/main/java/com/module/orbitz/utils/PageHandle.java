@@ -2,10 +2,10 @@ package com.module.orbitz.utils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.File;
 import java.time.Duration;
 import java.util.List;
 
@@ -30,9 +30,9 @@ public class PageHandle {
         return selectedText;
     }
 
-    public static void waitUntilDownloadsComplete(WebDriver driver, File file) {
-        FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(25))
-                .pollingEvery(Duration.ofMillis(100));
-        wait.until(x -> file.exists());
+    public static WebElement explicitWait(WebDriver driver, WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(30));
+        WebElement elementFound = wait.until(ExpectedConditions.visibilityOf(element));
+        return elementFound;
     }
 }
