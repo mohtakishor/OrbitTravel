@@ -41,7 +41,7 @@ public class EmailReporting {
             BodyPart messageBodyPart1 = new MimeBodyPart();
             messageBodyPart1.setText("This is message body");
             MimeBodyPart messageBodyPart2 = new MimeBodyPart();
-            String filename = System.getProperty("user.dir") + "/testng.xml";
+            String filename = Constants.SCREENSHOTS;
             DataSource source = new FileDataSource(filename);
             messageBodyPart2.setDataHandler(new DataHandler(source));
             messageBodyPart2.setFileName(filename);
