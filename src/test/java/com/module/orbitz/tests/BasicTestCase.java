@@ -8,12 +8,11 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
-
 
 public class BasicTestCase {
     WebDriver driver;
@@ -27,16 +26,22 @@ public class BasicTestCase {
         driver.get(Constants.URL);
     }
 
-    @AfterMethod
-    public void close() {
-        driver.close();
+    @Severity(SeverityLevel.BLOCKER)
+    @Description("Verify home page products")
+    @Test(priority = 1)
+    public void homePageVerification() {
+        new HomePage(driver).selectStayTab().selectFlightTab();
     }
 
     @Severity(SeverityLevel.BLOCKER)
-    @Description("Verify home page products")
-    @Test
-    public void homePageVerification() {
-        new HomePage(driver).selectStayTab().selectFlightTab();
-        new FlightDetails(driver).fromDestinationBox("Blr").toDestinationBox("Goa");
+    @Description("Verify flight")
+    @Test(priority = 2)
+    public void selectFlightProduct() {
+        new FlightDetails(driver).fromDestinationBox("Sin").toDestinationBox("Goa").selectDates().submitTheTripDetails();
+    }
+
+    @AfterTest
+    public void close() {
+        driver.close();
     }
 }
