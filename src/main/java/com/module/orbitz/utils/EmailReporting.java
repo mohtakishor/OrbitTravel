@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMultipart;
 import java.util.Properties;
 
 public class EmailReporting {
-    public static void main(String args[]) {
+    public static void sendEmail() {
         String host = "smtp.gmail.com";
         Properties props = System.getProperties();
         props.put("mail.host", host);

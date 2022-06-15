@@ -4,7 +4,9 @@ import com.module.orbitz.browsers.ChromeBrowser;
 import com.module.orbitz.flights.FlightDetails;
 import com.module.orbitz.homePage.HomePage;
 import com.module.orbitz.searchPage.AssertionsAfterSearchQuery;
+import com.module.orbitz.utils.CaptureScreenShot;
 import com.module.orbitz.utils.Constants;
+import com.module.orbitz.utils.EmailReporting;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -13,10 +15,12 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class BasicTestCase {
     WebDriver driver;
+    File file;
 
     @BeforeTest
     @Description("Open Chrome as an browser and to go Orbitz URL")
@@ -43,7 +47,17 @@ public class BasicTestCase {
     }
 
     @AfterTest
-    public void close() {
-        driver.close();
+    public void close() throws Exception {
+        try{
+            file = new File(Constants.SCREENSHOTS);
+            if (file.exists()) {
+                file.delete();
+            }
+            CaptureScreenShot.takeSnapShot(driver,Constants.SCREENSHOTS);
+            EmailReporting.sendEmail();
+        }
+        finally{
+            driver.close();
+        }
     }
 }

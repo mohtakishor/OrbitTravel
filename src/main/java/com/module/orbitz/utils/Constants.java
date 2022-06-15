@@ -6,6 +6,7 @@ public class Constants {
     public static final String FLIGHTTAB = "Flights";
     public static final String STAYSTAB = "Stays";
     public static final String CREATEACCOUNTEXPECTEDRESULT = "Create a free account";
+    public static final String SCREENSHOTS=System.getProperty("user.dir")+"/ScreenShots/searchPage.jpg";
 
     public interface CityConstantsFlights {
         public static final String BLR = "Bengaluru (BLR - Kempegowda Intl.)";
