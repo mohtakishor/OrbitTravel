@@ -3,7 +3,9 @@ package com.module.orbitz.tests;
 import com.module.orbitz.browsers.ChromeBrowser;
 import com.module.orbitz.flights.FlightDetails;
 import com.module.orbitz.homePage.HomePage;
+import com.module.orbitz.searchPage.AssertionsAfterSearchQuery;
 import com.module.orbitz.utils.Constants;
+import com.module.orbitz.utils.EmailReporting;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -38,10 +40,12 @@ public class BasicTestCase {
     @Test(priority = 2)
     public void selectFlightProduct() {
         new FlightDetails(driver).fromDestinationBox("Sin").toDestinationBox("Goa").selectDates().submitTheTripDetails();
+        new AssertionsAfterSearchQuery(driver).verifySignInbutton().verifyFlexibleDatesTabToOpenCalendar().verifyDestinationsFromAndTo();
     }
 
     @AfterTest
     public void close() {
+        EmailReporting.sendmail();
         driver.close();
     }
 }

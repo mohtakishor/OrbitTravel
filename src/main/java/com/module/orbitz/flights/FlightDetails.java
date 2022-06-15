@@ -1,6 +1,5 @@
 package com.module.orbitz.flights;
 
-import com.module.orbitz.utils.Constants;
 import com.module.orbitz.utils.PageHandle;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
@@ -34,9 +33,11 @@ public class FlightDetails {
         WebElement clickOnFromDestination = driver.findElement(clickOnLeavingFrom);
         clickOnFromDestination.click();
         WebElement enterFromDestination = driver.findElement(enterOnLeavingFrom);
+        logger.info("Enter destination as : " + fromDestination);
         PageHandle.clickAndSend(enterFromDestination, fromDestination);
         List<WebElement> listOfName = driver.findElements(listOfDestination);
         listOfName.get(0).click();
+        logger.info("Selected from destination : " + listOfName.get(0).getText());
         return new FlightDetails(driver);
     }
 
@@ -46,8 +47,10 @@ public class FlightDetails {
         clickOnToDestination.click();
         WebElement enterToDestination = driver.findElement(enterOnGoingTo);
         PageHandle.clickAndSend(enterToDestination, toDestination);
-        WebElement toGoPlace=driver.findElement(goingTo);
-        toGoPlace.click();
+        logger.info("Enter destination as : " + toDestination);
+        WebElement goToPlace = driver.findElement(goingTo);
+        goToPlace.click();
+        logger.info("Selected to destination : " + goToPlace.getText());
         return new FlightDetails(driver);
     }
 
@@ -65,6 +68,7 @@ public class FlightDetails {
     public FlightDetails submitTheTripDetails() {
         WebElement clickSearchBtn = driver.findElement(searchButton);
         clickSearchBtn.click();
+        logger.info("Clicked on search button");
         return new FlightDetails(driver);
     }
 }
