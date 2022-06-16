@@ -54,7 +54,7 @@ public class BasicTestCase {
                 file.delete();
             }
             CaptureScreenShot.takeSnapShot(driver,Constants.SCREENSHOTS);
-            EmailReporting.sendEmail();
+           // EmailReporting.sendEmail();
         }
         finally{
             driver.close();
