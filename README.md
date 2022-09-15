@@ -1,4 +1,4 @@
-# HostFullAssignment
+# OrbitTravel Automation
 
 #Project DescriptionThis project is based upon the web application of Orbitz where a user can book his traveling itnerary from E2E,whether its flights or stays or renting cars.
 
